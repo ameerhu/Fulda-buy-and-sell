@@ -33,6 +33,44 @@ export class Product {
     public images: Array<String>,
     public price: Number,
   ) { }
+
+  static approvedUnsoldProductFilters = [
+    'filter[include]=owner',
+    'filter[include]=category',
+    'filter[order]=postedDate%20DESC',
+    'filter[where][status]=approved',
+    'filter[where][sold]=false',
+  ];
+
+  static convertQueryParamsintoFilters(queryParam): Array<String> {
+    const filters = [];
+    // tslint:disable-next-line:forin
+    for (const key in queryParam) {
+      switch (key) {
+        case 'id':
+          filters.push('filter[where][id]=' + queryParam[key]);
+          break;
+        case 'name':
+          filters.push('filter[where][name][ilike]=%' + queryParam[key] + '%');
+          break;
+        case 'description':
+          filters.push('filter[where][description][ilike]=%' + queryParam[key] + '%');
+          break;
+        case 'location':
+          filters.push('filter[where][location][ilike]=' + queryParam[key]);
+          break;
+        case 'customerId':
+          filters.push('filter[where][customerId]=' + queryParam[key]);
+          break;
+        case 'categoryId':
+          filters.push('filter[where][categoryId]=' + queryParam[key]);
+          break;
+        default:
+          break;
+      }
+    }
+    return filters;
+  }
 }
 
 export class Criteria {

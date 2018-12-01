@@ -21,7 +21,7 @@
       </button>
       <div class="col-md-4 col-md-offset-2">
         <div class="input-group">
-          <input type="text" [(ngModel)]="searchTerm" class="form-control" placeholder="Search">
+          <input type="text" [(ngModel)]="searchTerm" (keyup.enter)="search()" class="form-control" placeholder="Search">
           <div class="input-group-btn">
             <button class="btn btn-default" (click)="search()">
               <span class="fas fa-search-plus"></span>

@@ -3,26 +3,42 @@ import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Product, Customer } from '../model';
 import { config } from '../config';
 import { BehaviorSubject } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  products: BehaviorSubject<Product[]> = new BehaviorSubject([]);
+  products$: BehaviorSubject<Product[]> = new BehaviorSubject([]);
+  approvedUnsoldProductFilters = [
+    'filter[include]=owner',
+    'filter[include]=category',
+    'filter[order]=postedDate%20DESC',
+    'filter[where][status]=approved',
+    'filter[where][sold]=false',
+  ];
+
   constructor(
     private http: HttpClient,
-    private router: Router
-  ) { }
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.activatedRoute.queryParams.subscribe(queryParam => {
+      console.log(queryParam);
+      const filters = [
+        ...this.approvedUnsoldProductFilters,
+        ...Product.convertQueryParamsintoFilters(queryParam)
+      ];
+      console.log(filters);
+      console.log(filters.join('&'));
+    });
+  }
 
-  getAll(searchTerm?) {
-    let queryString = '';
-    if (searchTerm) {
-      queryString = '?filter[where][name][like]=' + searchTerm;
-    }
+  get(queryString?: String) {
+    queryString = queryString ? queryString : '';
     this.http.get<Product[]>(config.apiUrl + '/products' + queryString)
       .subscribe(data => {
-        this.products.next(data);
+        this.products$.next(data);
       });
   }
 
@@ -32,12 +48,12 @@ export class ProductService {
       console.log('/products?filter[where][location][like]=' + data.location);
       this.http.get<Product[]>(config.apiUrl + '/products?filter[where][location][like]=' + data.location)
         .subscribe(data => {
-          this.products.next(data);
+          this.products$.next(data);
         });
     } else {
       this.http.get<Product[]>(config.apiUrl + '/products')
         .subscribe(data => {
-          this.products.next(data);
+          this.products$.next(data);
         });
     }
   }
@@ -45,7 +61,7 @@ export class ProductService {
   createProduct(formData) {
     return this.http.post(config.apiUrl + '/products', formData)
       .subscribe(data => {
-        this.getAll();
+        this.get();
         this.router.navigate(['/']);
       });
   }

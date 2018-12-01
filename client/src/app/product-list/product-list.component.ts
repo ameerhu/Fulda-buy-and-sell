@@ -17,8 +17,8 @@ export class ProductListComponent implements OnInit {
   constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    this.productService.getAll();
-    this.productService.products.subscribe(data => {
+    this.productService.get();
+    this.productService.products$.subscribe(data => {
       this.products = data;
     });
 
@@ -27,12 +27,12 @@ export class ProductListComponent implements OnInit {
       this.productService.getAllByCriteria(this.route.snapshot.params.d);
       this.router.navigate(['advSearch', { d: d }]);
     } else {
-      this.productService.getAll();
+      this.productService.get();
     }
   }
 
   search() {
-    this.productService.getAll(this.searchTerm);
+    this.productService.get(this.searchTerm);
   }
 
 }
