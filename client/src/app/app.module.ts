@@ -9,8 +9,8 @@ import { NavComponent } from './nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { CategoriesComponent } from './categories/categories.component';
 
-import { MatToolbarModule, MatInputModule, MatButtonModule, MatSidenavModule, MatIconModule,
-   MatListModule, MatCardModule, MatNativeDateModule, MatBadgeModule, MatMenuModule, MatSelectModule } from '@angular/material';
+import { MatToolbarModule, MatInputModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule,
+   MatNativeDateModule, MatBadgeModule, MatMenuModule, MatSelectModule, MatCheckboxModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -58,7 +58,8 @@ import { ImageUploadModule } from 'angular2-image-upload';
     MatCardModule,
     MatBadgeModule,
     MatListModule,
-    MatMenuModule
+    MatMenuModule,
+    MatCheckboxModule
   ],
   providers: [
     HttpClientModule

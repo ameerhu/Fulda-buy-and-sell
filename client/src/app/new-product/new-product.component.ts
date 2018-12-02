@@ -13,11 +13,7 @@ import { Customer } from '../model';
 export class NewProductComponent implements OnInit {
 
   $categories;
-  locations = [
-    'Fulda',
-    'Frankfurt',
-    'Berlin'
-  ];
+  locations: Array<String>;
   newProduct: FormGroup;
   uploadedImages = [];
   config = config;
@@ -26,9 +22,10 @@ export class NewProductComponent implements OnInit {
     private productService: ProductService,
     private categoryService: CategoryService,
     private formBuilder: FormBuilder
-    ) { }
+  ) { }
 
-    ngOnInit() {
+  ngOnInit() {
+    this.locations = this.productService.locations;
     this.$categories = this.categoryService.get();
     this.newProduct = this.formBuilder.group({
       'description': ['', Validators.required],
@@ -36,7 +33,7 @@ export class NewProductComponent implements OnInit {
       'price': ['', Validators.required],
       'location': ['', Validators.required],
       'categoryId': ['', Validators.required],
-      'customerId': [ new Customer().id],
+      'customerId': [Customer.fake.id],
       'postedDate': new Date(),
       'sold': [false],
       'status': ['pending'],

@@ -10,15 +10,17 @@ export class Customer {
     public emailVerified?: Boolean,
     public owns?: Array<Product>
   ) {
-    this.firstName = 'Ammar';
-    this.lastName = 'Hasan';
-    this.address = 'WiesenmuhleStr 3';
-    this.phone = '+491';
-    this.username = 'ammar94';
-    this.email = 'hasanammar94@gmail.com';
-    this.emailVerified = false;
-    this.id = '5c017125b00112f7ff8570ea';
   }
+  static fake = {
+    firstName: 'Ammar',
+    lastName: 'Hasan',
+    address: 'WiesenmuhleStr 3',
+    phone: '+491',
+    username: 'ammar94',
+    email: 'hasanammar94@gmail.com',
+    emailVerified: false,
+    id: '5c017125b00112f7ff8570ea'
+  };
 }
 
 export class Product {
@@ -47,25 +49,28 @@ export class Product {
     // tslint:disable-next-line:forin
     for (const key in queryParam) {
       switch (key) {
-        case 'id':
-          filters.push('filter[where][id]=' + queryParam[key]);
+        case 'id': filters.push('filter[where][id]=' + queryParam[key]);
           break;
-        case 'name':
-          filters.push('filter[where][name][ilike]=%' + queryParam[key] + '%');
+        case 'name': filters.push('filter[where][name][like]=' + queryParam[key] + '&filter[where][name][options]=i');
           break;
-        case 'description':
-          filters.push('filter[where][description][ilike]=%' + queryParam[key] + '%');
+        case 'description': filters.push('filter[where][description][like]=' + queryParam[key] + '&filter[where][description][options]=i');
           break;
-        case 'location':
-          filters.push('filter[where][location][ilike]=' + queryParam[key]);
+        case 'location': filters.push('filter[where][location][like]=' + queryParam[key] + '&filter[where][location][options]=i');
           break;
-        case 'customerId':
-          filters.push('filter[where][customerId]=' + queryParam[key]);
+        case 'minPrice': filters.push('filter[where][and][0][price][gt]=' + queryParam[key]);
           break;
-        case 'categoryId':
-          filters.push('filter[where][categoryId]=' + queryParam[key]);
+        case 'maxPrice': filters.push('filter[where][and][1][price][lt]=' + queryParam[key]);
+          break;
+        case 'minDate': filters.push('filter[where][and][0][postedDate][gt]=' + queryParam[key]);
+          break;
+        case 'maxDate': filters.push('filter[where][and][1][postedDate][lt]=' + queryParam[key]);
+          break;
+        case 'customerId': filters.push('filter[where][customerId]=' + queryParam[key]);
+          break;
+        case 'categoryId': filters.push('filter[where][categoryId]=' + queryParam[key]);
           break;
         default:
+          console.warn('Please add product filter for this queryparam: ', key);
           break;
       }
     }
@@ -73,11 +78,3 @@ export class Product {
   }
 }
 
-export class Criteria {
-  constructor(
-    public area: String,
-    public minPrice: number,
-    public maxPrice: number,
-    public postedDate: Date
-  ) {}
-}

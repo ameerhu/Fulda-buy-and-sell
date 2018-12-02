@@ -9,14 +9,9 @@ import { Router, ActivatedRoute } from '@angular/router';
   providedIn: 'root'
 })
 export class ProductService {
+  locations = ['Fulda', 'Petersberg', 'Alsfeld', 'Neuhof'];
+  advanceSearch$: BehaviorSubject<Boolean> = new BehaviorSubject(false);
   products$: BehaviorSubject<Product[]> = new BehaviorSubject([]);
-  approvedUnsoldProductFilters = [
-    'filter[include]=owner',
-    'filter[include]=category',
-    'filter[order]=postedDate%20DESC',
-    'filter[where][status]=approved',
-    'filter[where][sold]=false',
-  ];
 
   constructor(
     private http: HttpClient,
@@ -24,38 +19,25 @@ export class ProductService {
     private activatedRoute: ActivatedRoute
   ) {
     this.activatedRoute.queryParams.subscribe(queryParam => {
-      console.log(queryParam);
-      const filters = [
-        ...this.approvedUnsoldProductFilters,
-        ...Product.convertQueryParamsintoFilters(queryParam)
-      ];
-      console.log(filters);
-      console.log(filters.join('&'));
+      if (this.activatedRoute.snapshot.url.length === 0) {
+        console.log(queryParam);
+        const filters = [
+          ...Product.approvedUnsoldProductFilters,
+          ...Product.convertQueryParamsintoFilters(queryParam)
+        ];
+        console.log(filters);
+        console.log(filters.join('&'));
+        this.get(filters.join('&'));
+      }
     });
   }
 
   get(queryString?: String) {
-    queryString = queryString ? queryString : '';
+    queryString = queryString ? '?' + queryString : '';
     this.http.get<Product[]>(config.apiUrl + '/products' + queryString)
       .subscribe(data => {
         this.products$.next(data);
       });
-  }
-
-  getAllByCriteria(data?) {
-    if (data) {
-      data = JSON.parse(data);
-      console.log('/products?filter[where][location][like]=' + data.location);
-      this.http.get<Product[]>(config.apiUrl + '/products?filter[where][location][like]=' + data.location)
-        .subscribe(data => {
-          this.products$.next(data);
-        });
-    } else {
-      this.http.get<Product[]>(config.apiUrl + '/products')
-        .subscribe(data => {
-          this.products$.next(data);
-        });
-    }
   }
 
   createProduct(formData) {

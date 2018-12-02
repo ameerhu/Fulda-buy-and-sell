@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Product, Customer } from '../model';
 import { ProductService } from '../_services/product.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -16,7 +16,7 @@ export class ProductComponent {
     private productService: ProductService,
     private router: Router) {
 
-    this.currentUser = new Customer();
+    this.currentUser = Customer.fake;
 
   }
 
