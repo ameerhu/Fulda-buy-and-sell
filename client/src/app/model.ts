@@ -37,8 +37,6 @@ export class Product {
   ) { }
 
   static approvedUnsoldProductFilters = [
-    'filter[include]=owner',
-    'filter[include]=category',
     'filter[order]=postedDate%20DESC',
     'filter[where][status]=approved',
     'filter[where][sold]=false',
