@@ -17,12 +17,15 @@ export class NewProductComponent implements OnInit {
   newProduct: FormGroup;
   uploadedImages = [];
   config = config;
+  currentUser;
 
   constructor(
     private productService: ProductService,
     private categoryService: CategoryService,
     private formBuilder: FormBuilder
-  ) { }
+  ) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  }
 
   ngOnInit() {
     this.locations = this.productService.locations;
@@ -33,7 +36,7 @@ export class NewProductComponent implements OnInit {
       'price': ['', Validators.required],
       'location': ['', Validators.required],
       'categoryId': ['', Validators.required],
-      'customerId': [Customer.fake.id],
+      'customerId': [this.currentUser.id],
       'postedDate': new Date(),
       'sold': [false],
       'status': ['pending'],

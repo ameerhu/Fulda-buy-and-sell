@@ -2,9 +2,9 @@
   <mat-card-header>
     <!-- <div mat-card-avatar class="product-header-image" [ngStyle]="{'background-image': 'url('+ product.createdBy.avatar + ')'}"></div> -->
     <div mat-card-avatar class="product-header-image">
-      <img ngxGravatar class="product-header-image" [email]="currentUser.email" size="40">
+      <img ngxGravatar class="product-header-image" [email]="product.owner.email" size="40">
     </div>
-    <mat-card-title>{{currentUser.username}}</mat-card-title>
+    <mat-card-title>{{product.owner.username}}</mat-card-title>
     <mat-card-subtitle>{{product.postedDate | date: 'short'}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>

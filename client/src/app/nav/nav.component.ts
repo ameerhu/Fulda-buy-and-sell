@@ -11,13 +11,16 @@ import { ProductService } from '../_services/product.service';
 })
 export class NavComponent {
   searchTerm;
+  currentUser;
 
   isHandset: Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.Handset);
   constructor(
     private breakpointObserver: BreakpointObserver,
     private router: Router,
     private productService: ProductService
-    ) {}
+    ) {
+      this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    }
 
   search() {
     this.router.navigate([''], {
@@ -30,5 +33,10 @@ export class NavComponent {
 
   toggleAdvanceSearch($event) {
     this.productService.advanceSearch$.next($event);
+  }
+
+  logout() {
+    localStorage.removeItem('currentUser');
+    this.router.navigate(['/login']);
   }
 }

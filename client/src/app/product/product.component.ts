@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Product, Customer } from '../model';
+import { Product } from '../model';
 import { ProductService } from '../_services/product.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -14,15 +14,14 @@ export class ProductComponent {
 
   constructor(
     private productService: ProductService,
-    private router: Router) {
-
-    this.currentUser = Customer.fake;
-
+    private route: ActivatedRoute,
+    private router: Router
+    ) {
+      this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
-  detailProduct(product) {
-    const p = JSON.stringify(product);
-    this.router.navigate(['searchDetail', { p: p }]);
+  detailProduct(product: Product) {
+    this.router.navigate(['product/' + product.id ], {relativeTo: this.route});
   }
 
   buy() {

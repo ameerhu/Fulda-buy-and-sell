@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Product, Customer } from '../model';
 import { config } from '../config';
 import { BehaviorSubject } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -18,16 +18,15 @@ export class ProductService {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
-    this.activatedRoute.queryParams.subscribe(queryParam => {
-      if (this.activatedRoute.snapshot.url.length === 0) {
-        console.log(queryParam);
-        const filters = [
-          ...Product.approvedUnsoldProductFilters,
-          ...Product.convertQueryParamsintoFilters(queryParam)
-        ];
-        console.log(filters);
-        console.log(filters.join('&'));
-        this.get(filters.join('&'));
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        if (this.activatedRoute.snapshot.firstChild.routeConfig.path === 'home') {
+          const filters = [
+            ...Product.approvedUnsoldProductFilters,
+            ...Product.convertQueryParamsintoFilters(this.activatedRoute.snapshot.queryParams)
+          ];
+          this.get(filters.join('&'));
+        }
       }
     });
   }

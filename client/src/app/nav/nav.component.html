@@ -38,26 +38,37 @@
       </div>
       <span class="spacer"></span>
 
-      <!-- Login Signup for large views -->
-      <div class="toolbar-buttons" *ngIf="!(isHandset | async)!.matches">
-        <button mat-raised-button color="accent">Login</button>
-        <button mat-raised-button color="accent">Sign Up</button>
-      </div>
-
-      <!-- Login Signup for small views -->
-      <div *ngIf="(isHandset | async)!.matches">
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
+      <ng-template [ngIf]="this.currentUser">
+        <a mat-icon-button [matMenuTriggerFor]="menu">
+          <img ngxGravatar [email]="this.currentUser.email" size="40">
+        </a>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>
-            <span>Login</span>
-          </button>
-          <button mat-menu-item>
-            <span>Signup</span>
-          </button>
+          <button mat-menu-item (click)="logout()">Logout</button>
         </mat-menu>
-      </div>
+      </ng-template>
+
+      <ng-template [ngIf]="!this.currentUser">
+        <!-- Login Signup for large views -->
+        <div class="toolbar-buttons" *ngIf="!(isHandset | async)!.matches">
+          <button mat-raised-button color="accent">Login</button>
+          <button mat-raised-button color="accent">Sign Up</button>
+        </div>
+
+        <!-- Login Signup for small views -->
+        <div *ngIf="(isHandset | async)!.matches">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <span>Login</span>
+            </button>
+            <button mat-menu-item>
+              <span>Signup</span>
+            </button>
+          </mat-menu>
+        </div>
+      </ng-template>
     </mat-toolbar>
     <router-outlet></router-outlet>
     <button mat-fab class="button-new-product" routerLink="new"><mat-icon>add</mat-icon></button>

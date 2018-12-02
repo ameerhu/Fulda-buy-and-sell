@@ -25,15 +25,16 @@ export class Customer {
 
 export class Product {
   constructor(
-    public name: String,
-    public location: String,
-    public postedDate: Date,
-    public description: String,
-    public status: String,
-    public sold: Boolean,
-    public id: String,
-    public images: Array<String>,
-    public price: Number,
+    public name?: String,
+    public location?: String,
+    public postedDate?: Date,
+    public description?: String,
+    public status?: String,
+    public sold?: Boolean,
+    public id?: String,
+    public images?: Array<String>,
+    public price?: Number,
+    public owner?: Customer,
   ) { }
 
   static approvedUnsoldProductFilters = [
