@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { ProductService } from '../_services/product.service';
+import {Route, RouterModule  } from '@angular/router';
+import { SignComponent } from '../sign/sign.component';
+
+
 
 @Component({
   selector: 'app-nav',
@@ -20,4 +24,7 @@ export class NavComponent {
   search() {
     this.productService.getAll(this.searchTerm);
   }
+
+
+
 }

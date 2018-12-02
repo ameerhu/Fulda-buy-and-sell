@@ -21,6 +21,11 @@ import { ProductListComponent } from './product-list/product-list.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { NewProductComponent } from './new-product/new-product.component';
 import { ImageUploadModule } from 'angular2-image-upload';
+import { SignComponent } from './sign/sign.component';
+import {Route, RouterModule  } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+
+
 
 @NgModule({
   declarations: [
@@ -31,7 +36,9 @@ import { ImageUploadModule } from 'angular2-image-upload';
     CategoriesComponent,
     NewProductComponent,
     SearchDetailComponent,
-    AdvSearchComponent
+    AdvSearchComponent,
+    SignComponent,
+    LoginComponent
   ],
   imports: [
     ImageUploadModule.forRoot(),
