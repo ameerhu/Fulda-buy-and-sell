@@ -28,6 +28,7 @@ import { AlertService } from './_services/alert.service';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { CustomerService } from './_services/customer.service';
+import { NavAdminComponent } from './nav-admin/nav-admin.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { CustomerService } from './_services/customer.service';
     ProductDetailComponent,
     AdvSearchComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    NavAdminComponent
   ],
   imports: [
     ImageUploadModule.forRoot(),

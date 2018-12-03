@@ -64,9 +64,11 @@ export class Product {
           break;
         case 'maxDate': filters.push('filter[where][and][1][postedDate][lt]=' + queryParam[key]);
           break;
-        case 'customerId': filters.push('filter[where][customerId]=' + queryParam[key]);
+        case 'customerId': filters.push('filter[where][customerId][like]=' + queryParam[key]);
           break;
-        case 'categoryId': filters.push('filter[where][categoryId]=' + queryParam[key]);
+        case 'categoryId': filters.push('filter[where][categoryId][like]=' + queryParam[key]);
+          break;
+        case 'status': filters.push('filter[where][status]=' + queryParam[key]);
           break;
         default:
           console.warn('Please add product filter for this queryparam: ', key);

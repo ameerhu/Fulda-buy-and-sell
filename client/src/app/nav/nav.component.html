@@ -7,6 +7,7 @@
     [mode]="(isHandset | async)!.matches ? 'over' : 'side'"
     [opened]="!(isHandset | async)!.matches">
     <mat-toolbar color="primary"><a class="brand" routerLink="/"><span>YouBuy</span></a></mat-toolbar>
+    <app-nav-admin *ngIf="currentUser && currentUser.realm === 'admin'"></app-nav-admin>
     <app-categories></app-categories>
     <hr/>
     <mat-nav-list>
@@ -50,8 +51,8 @@
       <ng-template [ngIf]="!this.currentUser">
         <!-- Login Signup for large views -->
         <div class="toolbar-buttons" *ngIf="!(isHandset | async)!.matches">
-          <button mat-raised-button color="accent">Login</button>
-          <button mat-raised-button color="accent">Sign Up</button>
+          <button routerLink="/login" mat-raised-button color="accent">Login</button>
+          <button routerLink="/signup" mat-raised-button color="accent">Sign Up</button>
         </div>
 
         <!-- Login Signup for small views -->

@@ -1,9 +1,11 @@
 <section class="background">
   <div class="main">
-    <div class="title">
-      <span class="you">You</span>
-      <span class="buy">Buy</span>
-    </div>
+    <a routerLink="/home">
+      <div class="title">
+        <span class="you">You</span>
+        <span class="buy">Buy</span>
+      </div>
+    </a>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="field-wrapper">
         <input type="text" name="name" placeholder="Name" type="text" formControlName="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }"/>
