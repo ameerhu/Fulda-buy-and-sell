@@ -5,6 +5,7 @@ import { config } from '../config';
 
 @Injectable()
 export class AuthenticationService {
+  currentUser = JSON.parse(localStorage.getItem('currentUser'));
   constructor(private http: HttpClient) { }
 
   login(username: string, password: string) {
@@ -14,9 +15,9 @@ export class AuthenticationService {
         let user;
         if (data && data.user) {
           user = { token: data.id, ...data, ...data.user};
-          console.log(user);
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(user));
+          this.currentUser = user;
         }
 
         return user;
@@ -26,5 +27,6 @@ export class AuthenticationService {
   logout() {
     // remove customer from local storage to log customer out
     localStorage.removeItem('currentUser');
+    this.currentUser = null;
   }
 }

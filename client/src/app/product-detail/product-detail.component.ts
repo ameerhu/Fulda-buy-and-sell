@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../model';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../_services/product.service';
+import { AuthenticationService } from '../_services/authentication.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -13,17 +14,15 @@ export class ProductDetailComponent implements OnInit {
   currentUser;
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private auth: AuthenticationService,
   ) { }
 
   ngOnInit() {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.currentUser = this.auth.currentUser;
     this.route.params.subscribe(params => {
-      this.productService.get('filter[where][id]=' + params['id']);
-      this.productService.products$.subscribe(product => {
-        if (product.length) {
-          this.product = product[0];
-        }
+      this.productService.getById(params['id']).subscribe(product => {
+          this.product = product;
       });
     });
   }

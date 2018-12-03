@@ -27,6 +27,7 @@ import { AuthenticationService } from './_services/authentication.service';
 import { AlertService } from './_services/alert.service';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
+import { CustomerService } from './_services/customer.service';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
   providers: [
     HttpClientModule,
     AuthenticationService,
+    CustomerService,
     // AuthGuard,
     AlertService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

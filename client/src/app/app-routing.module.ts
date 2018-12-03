@@ -15,7 +15,7 @@ const routes: Route[] = [
     path: 'home', component: NavComponent,
     children: [
       { path: '', component: ProductListComponent},
-      { path: 'new', component: NewProductComponent},
+      { path: 'new', component: NewProductComponent, canActivate: [AuthGuard]},
       { path: 'product/:id', component: ProductDetailComponent, canActivate: [AuthGuard]},
       { path: '**', redirectTo: '', pathMatch: 'full' }
     ]

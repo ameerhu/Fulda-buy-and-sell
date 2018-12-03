@@ -4,6 +4,7 @@ import { ProductService } from '../_services/product.service';
 import { CategoryService } from '../_services/category.service';
 import { config } from '../config';
 import { Customer } from '../model';
+import { AuthenticationService } from '../_services/authentication.service';
 
 @Component({
   selector: 'app-new-product',
@@ -17,15 +18,13 @@ export class NewProductComponent implements OnInit {
   newProduct: FormGroup;
   uploadedImages = [];
   config = config;
-  currentUser;
 
   constructor(
     private productService: ProductService,
     private categoryService: CategoryService,
-    private formBuilder: FormBuilder
-  ) {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-  }
+    private formBuilder: FormBuilder,
+    private auth: AuthenticationService
+  ) {}
 
   ngOnInit() {
     this.locations = this.productService.locations;
@@ -36,7 +35,7 @@ export class NewProductComponent implements OnInit {
       'price': ['', Validators.required],
       'location': ['', Validators.required],
       'categoryId': ['', Validators.required],
-      'customerId': [this.currentUser.id],
+      'customerId': [this.auth.currentUser.id],
       'postedDate': new Date(),
       'sold': [false],
       'status': ['pending'],

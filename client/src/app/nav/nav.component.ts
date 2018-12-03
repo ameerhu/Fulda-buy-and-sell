@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ProductService } from '../_services/product.service';
+import { AuthenticationService } from '../_services/authentication.service';
 
 @Component({
   selector: 'app-nav',
@@ -17,9 +18,10 @@ export class NavComponent {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private router: Router,
-    private productService: ProductService
+    private productService: ProductService,
+    private auth: AuthenticationService
     ) {
-      this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      this.currentUser = this.auth.currentUser;
     }
 
   search() {

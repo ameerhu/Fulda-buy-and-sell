@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Product } from '../model';
 import { ProductService } from '../_services/product.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AuthenticationService } from '../_services/authentication.service';
 
 @Component({
   selector: 'app-product',
@@ -10,15 +11,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ProductComponent {
   @Input() product: Product;
+  @Input() isAdmin: Boolean;
   currentUser;
 
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private auth: AuthenticationService,
     ) {
-      this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-  }
+      this.currentUser = this.auth.currentUser;
+    }
 
   detailProduct(product: Product) {
     this.router.navigate(['product/' + product.id ], {relativeTo: this.route});

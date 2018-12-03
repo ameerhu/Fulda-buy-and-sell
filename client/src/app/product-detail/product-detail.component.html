@@ -1,7 +1,7 @@
 <mat-card>
   <div class="row">
     <div class="col-sm-6">
-      <img ngxGravatar [email]="this.currentUser.email" size="40"> &nbsp;&nbsp;&nbsp; <b> Name {{currentUser.username}} </b>
+      <img ngxGravatar [email]="this.currentUser.email" size="40"> &nbsp;&nbsp;&nbsp; <b> {{currentUser.username}} </b>
       <br><br>
       <b>Posted Date:</b> {{product.postedDate}}
       <br><br>
@@ -42,7 +42,7 @@
     </div>
 
     <div class="col-sm-3">
-      <img [src]="product.images.length ? product.images[0] : '../assets/img/img-src.png'" class="display-pic"><br>
+      <img [src]="product.images && product.images.length ? product.images[0] : '../assets/img/img-src.png'" class="display-pic"><br>
     </div>
   </div>
 </mat-card>

@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Product, Customer } from '../model';
 import { config } from '../config';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,15 +17,20 @@ export class ProductService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private auth: AuthenticationService
   ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         if (this.activatedRoute.snapshot.firstChild.routeConfig.path === 'home') {
-          const filters = [
-            ...Product.approvedUnsoldProductFilters,
+          let filters: Array<String> = [
             ...Product.convertQueryParamsintoFilters(this.activatedRoute.snapshot.queryParams)
           ];
+          const currentUser = this.auth.currentUser;
+          // i.e Customer or Guest user
+          if (!currentUser || currentUser.realm !== 'admin') {
+            filters = filters.concat(Product.approvedUnsoldProductFilters);
+          }
           this.get(filters.join('&'));
         }
       }
@@ -37,6 +43,10 @@ export class ProductService {
       .subscribe(data => {
         this.products$.next(data);
       });
+  }
+
+  getById(id: String): Observable<Product> {
+    return this.http.get<Product>(config.apiUrl + '/products/' + id);
   }
 
   createProduct(formData) {
