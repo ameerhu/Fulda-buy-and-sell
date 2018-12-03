@@ -35,6 +35,18 @@
         </div>
       </div>
       <div class="field-wrapper">
+        <input type="text" name="phone" placeholder="Phone" formControlName="phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }"/>
+        <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+            <div *ngIf="f.phone.errors.required">Phone is required</div>
+        </div>
+      </div>
+      <div class="field-wrapper">
+        <input type="text" name="address" placeholder="Address" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }"/>
+        <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+            <div *ngIf="f.address.errors.required">Address is required</div>
+        </div>
+      </div>
+      <div class="field-wrapper">
         <input class="submit" type="submit" value="Signup" [disabled]="loading">
       </div>
     </form>

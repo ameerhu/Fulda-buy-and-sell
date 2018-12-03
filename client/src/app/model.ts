@@ -1,8 +1,7 @@
 export class Customer {
   constructor(
     public id?: String,
-    public firstName?: String,
-    public lastName?: String,
+    public name?: String,
     public address?: String,
     public phone?: String,
     public email?: String,
@@ -11,16 +10,6 @@ export class Customer {
     public owns?: Array<Product>
   ) {
   }
-  static fake = {
-    firstName: 'Ammar',
-    lastName: 'Hasan',
-    address: 'WiesenmuhleStr 3',
-    phone: '+491',
-    username: 'ammar94',
-    email: 'hasanammar94@gmail.com',
-    emailVerified: false,
-    id: '5c017125b00112f7ff8570ea'
-  };
 }
 
 export class Product {

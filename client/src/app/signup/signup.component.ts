@@ -26,6 +26,8 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
       name: ['', [Validators.required]],
+      address: [''],
+      phone: ['', [Validators.required]],
       username: ['', [Validators.required, Validators.pattern(/^\S*$/)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -40,6 +42,8 @@ export class SignupComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.registerForm.invalid) {
+      console.log(this.registerForm.value);
+      console.log(this.registerForm);
       return;
     }
 
