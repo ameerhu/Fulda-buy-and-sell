@@ -20,7 +20,7 @@
   <mat-list>
 
   </mat-list>
-  <mat-card-actions class="product-actions">
+  <mat-card-actions class="product-actions" *ngIf="!(currentUser && currentUser.realm === 'admin')">
     <!--matBadgePosition="after" matBadgeColor="accent" matBadge="{{product.wish.length}}"-->
     <button class="button-wish" mat-raised-button color="accent"
       (click)="hasWished()? unwish() : wish()">
@@ -36,6 +36,33 @@
       <mat-icon>done</mat-icon>
       <p>Solved</p>
     </span-->
-    <button mat-button (click)="detailProduct(product)">Detail</button>
+    <button mat-raised-button class="btn-detail" (click)="detailProduct(product)">Detail</button>
   </mat-card-actions>
+
+
+  <mat-card-actions class="product-actions" 
+  *ngIf="currentUser && currentUser.realm === 'admin' && product.status === 'pending'">
+
+    <button mat-raised-button class="btn-approve"
+      (click)='approved(product)'>
+      Approve
+    </button>
+
+    <button mat-raised-button color="warn" (click)="disapproved(product)" *ngIf="product.status === 'pending'">
+      Disapprove
+    </button>
+
+  </mat-card-actions>
+
+  
+    <mat-card-actions align="center" 
+    *ngIf="currentUser && currentUser.realm === 'admin' && !(product.status === 'pending')">
+      
+    <button class="button-buy" mat-raised-button disabled
+      color="primary">
+        Product is {{product.status}}
+      </button>
+      
+  </mat-card-actions>
+
 </mat-card>

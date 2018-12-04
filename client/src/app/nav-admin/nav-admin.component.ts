@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-nav-admin',
   templateUrl: './nav-admin.component.html',
-  styleUrls: ['./nav-admin.component.css']
+  styleUrls: ['./nav-admin.component.css'],
 })
 export class NavAdminComponent implements OnInit {
 
@@ -14,7 +14,9 @@ export class NavAdminComponent implements OnInit {
   }
 
   searchByStatus(status) {
+    console.log("navigation by nav-admin");
     this.router.navigate([''], { queryParamsHandling: 'merge', queryParams: { status: status }});
+    // this.router.navigate(['/adminList']);
+    console.log("navigated by nav-admin");
   }
-
 }

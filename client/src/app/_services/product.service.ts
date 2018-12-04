@@ -57,6 +57,39 @@ export class ProductService {
       });
   }
 
+  getPending() {
+    let queryString = '';
+      queryString = '?filter[where][status][like]=pending';
+    this.http.get<Product[]>(config.apiUrl + '/products' + queryString)
+      .subscribe(data => {
+        this.products$.next(data);
+      });
+  }
+
+  getApproved() {
+    let queryString = '';
+      queryString = '?filter[where][status]=approved';
+    this.http.get<Product[]>(config.apiUrl + '/products' + queryString)
+      .subscribe(data => {
+        this.products$.next(data);
+      });
+  }
+  
+  getDisapproved() {
+    let queryString = '';
+      queryString = '?filter[where][status]=disapproved';
+    this.http.get<Product[]>(config.apiUrl + '/products' + queryString)
+      .subscribe(data => {
+        this.products$.next(data);
+      });
+  }
+
+  approved(product){
+    console.log("in approve service");
+    console.log(product);
+    return this.http.put(config.apiUrl + '/products' , product );
+  }
+
   // solveProduct(product: Product) {
   //   product.solved = true;
   //   return this.http.put(config.apiUrl + '/products', Product);

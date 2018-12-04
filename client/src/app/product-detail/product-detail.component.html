@@ -1,4 +1,5 @@
-<mat-card>
+<mat-card class="product-card">
+  <div class="container">
   <div class="row">
     <div class="col-sm-6">
       <img ngxGravatar [email]="this.currentUser.email" size="40"> &nbsp;&nbsp;&nbsp; <b> {{currentUser.username}} </b>
@@ -27,9 +28,9 @@
         <textarea matInput placeholder="Enter your message" rows="5" cols="60"></textarea>
       </mat-form-field>
 
-      <button mat-button>Send Message</button>
+      <button mat-raised-button color="primary">Send Message</button>
     </div>
-
+<!-- 
     <div class="col-sm-3">
       <div class="row"></div>
       <div class="col-sm-12"></div>
@@ -39,10 +40,13 @@
         <a href=""><img src="../assets/img/img-src.png" class="sample-pic"></a><br>
         <a href=""><img src="../assets/img/img-src.png" class="sample-pic"></a><br>
       </div>
-    </div>
+    </div> -->
+
+    <div class="col-sm-1"></div>
 
     <div class="col-sm-3">
       <img [src]="product.images && product.images.length ? product.images[0] : '../assets/img/img-src.png'" class="display-pic"><br>
     </div>
   </div>
+</div>  
 </mat-card>
