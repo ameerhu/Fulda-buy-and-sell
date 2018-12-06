@@ -14,9 +14,6 @@ export class NavAdminComponent implements OnInit {
   }
 
   searchByStatus(status) {
-    console.log("navigation by nav-admin");
     this.router.navigate([''], { queryParamsHandling: 'merge', queryParams: { status: status }});
-    // this.router.navigate(['/adminList']);
-    console.log("navigated by nav-admin");
   }
 }

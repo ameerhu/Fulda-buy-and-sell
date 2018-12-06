@@ -28,8 +28,6 @@ import { AlertService } from './_services/alert.service';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { CustomerService } from './_services/customer.service';
-import { AdminPanelComponent } from './admin-panel/admin-panel.component';
-import { AdminProductListComponent } from './admin-product-list/admin-product-list.component';
 import { NavAdminComponent } from './nav-admin/nav-admin.component';
 
 @NgModule({
@@ -37,7 +35,6 @@ import { NavAdminComponent } from './nav-admin/nav-admin.component';
     AppComponent,
     NavComponent,
     ProductComponent,
-    AdminPanelComponent,
     ProductListComponent,
     CategoriesComponent,
     NewProductComponent,
@@ -45,7 +42,6 @@ import { NavAdminComponent } from './nav-admin/nav-admin.component';
     AdvSearchComponent,
     LoginComponent,
     SignupComponent,
-    AdminProductListComponent,
     NavAdminComponent
   ],
   imports: [

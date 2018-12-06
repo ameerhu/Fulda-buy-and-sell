@@ -12,6 +12,14 @@ export class Customer {
   }
 }
 
+export class Category {
+  constructor(
+    public id?: String,
+    public name?: String,
+  ) {
+  }
+}
+
 export class Product {
   constructor(
     public name?: String,
@@ -24,6 +32,7 @@ export class Product {
     public images?: Array<String>,
     public price?: Number,
     public owner?: Customer,
+    public category?: Category,
   ) { }
 
   static approvedUnsoldProductFilters = [

@@ -56,6 +56,17 @@ export class ProductComponent {
     this.nAdmin.searchByStatus('pending');
   }
 
+  editProduct(product: Product){
+    this.router.navigate(['home/new',{product:JSON.stringify(product)}]);
+  }
+
+  deleteProduct(product){
+     this.productService.delete(product.id).subscribe(data => {
+         this.openSnackBar("Notify","Product has been deleted");
+         this.productService.getByCustomerId(this.currentUser.id);
+     });
+  }
+
   buy() {
     // this.productService.solveProduct(this.product).subscribe(data => {
     //   this.product.solved = true;

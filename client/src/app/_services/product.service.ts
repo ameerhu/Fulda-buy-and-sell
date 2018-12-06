@@ -49,6 +49,15 @@ export class ProductService {
     return this.http.get<Product>(config.apiUrl + '/products/' + id);
   }
 
+  getByCustomerId(id: String){
+    let queryString = '';
+      queryString = '?filter[where][customerId]='+id;
+    this.http.get<Product[]>(config.apiUrl + '/products' + queryString)
+      .subscribe(data => {
+        this.products$.next(data);
+      });
+  }
+
   createProduct(formData) {
     return this.http.post(config.apiUrl + '/products', formData)
       .subscribe(data => {
@@ -88,6 +97,10 @@ export class ProductService {
     console.log("in approve service");
     console.log(product);
     return this.http.put(config.apiUrl + '/products' , product );
+  }
+
+  delete(id: String) {
+    return this.http.delete(config.apiUrl + '/products/' + id);
   }
 
   // solveProduct(product: Product) {

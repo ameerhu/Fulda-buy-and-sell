@@ -44,6 +44,7 @@
           <img ngxGravatar [email]="this.currentUser.email" size="40">
         </a>
         <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="dashboard(currentUser.id)">DashBoard</button>
           <button mat-menu-item (click)="logout()">Logout</button>
         </mat-menu>
       </ng-template>

@@ -7,19 +7,16 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { AuthGuard } from './_guard/auth.guard';
 import { NavComponent } from './nav/nav.component';
-import { AdminProductListComponent } from './admin-product-list/admin-product-list.component';
 
 const routes: Route[] = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  // { path: 'adminList', component: AdminProductListComponent},
   {
     path: 'home', component: NavComponent,
     children: [
       { path: '', component: ProductListComponent},
       { path: 'new', component: NewProductComponent, canActivate: [AuthGuard]},
       { path: 'product/:id', component: ProductDetailComponent, canActivate: [AuthGuard]},
-      // { path: 'adminList', component: AdminProductListComponent, canActivate: [AuthGuard]},
       { path: '**', redirectTo: '', pathMatch: 'full' }
     ]
   },

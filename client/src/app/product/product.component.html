@@ -22,47 +22,54 @@
   </mat-list>
   <mat-card-actions class="product-actions" *ngIf="!(currentUser && currentUser.realm === 'admin')">
     <!--matBadgePosition="after" matBadgeColor="accent" matBadge="{{product.wish.length}}"-->
-    <button class="button-wish" mat-raised-button color="accent"
+    <button class="button-wish" mat-raised-button color="accent" 
+      *ngIf="!(currentUser && currentUser.id === product.owner.id)"
       (click)="hasWished()? unwish() : wish()">
       Wish
     </button>
+    <button mat-raised-button class="btn-approve"
+      *ngIf="currentUser && currentUser.id === product.owner.id"
+      (click)='editProduct(product)'>
+      Edit
+    </button>
     <!--*ngIf="!product.solved && product.createdBy.customername === currentUser.customername"-->
     <button class="button-buy" mat-raised-button color="primary"
+    *ngIf="!(currentUser && currentUser.id === product.owner.id)"
       (click)="buy()">
       Buy
     </button>
-    <!--span style="flex:1 1 auto"></span>
+    <!-- span style="flex:1 1 auto"></span>
     <span class="solved" *ngIf="product.solved">
       <mat-icon>done</mat-icon>
       <p>Solved</p>
-    </span-->
-    <button mat-raised-button class="btn-detail" (click)="detailProduct(product)">Detail</button>
+    </span> -->
+    <button mat-raised-button class="btn-detail" 
+    *ngIf="!(currentUser && currentUser.id === product.owner.id)"
+      (click)="detailProduct(product)">Detail</button>
+      <button mat-raised-button color="warn"
+      *ngIf="currentUser && currentUser.id === product.owner.id"
+     (click)='deleteProduct(product)'>
+      Delete
+    </button>
   </mat-card-actions>
 
-
+<!-- this will shown only when the user will be admin to approve/disapprove product -->
   <mat-card-actions class="product-actions" 
   *ngIf="currentUser && currentUser.realm === 'admin' && product.status === 'pending'">
-
     <button mat-raised-button class="btn-approve"
       (click)='approved(product)'>
       Approve
     </button>
-
     <button mat-raised-button color="warn" (click)="disapproved(product)" *ngIf="product.status === 'pending'">
       Disapprove
     </button>
-
   </mat-card-actions>
-
-  
     <mat-card-actions align="center" 
     *ngIf="currentUser && currentUser.realm === 'admin' && !(product.status === 'pending')">
-      
     <button class="button-buy" mat-raised-button disabled
       color="primary">
         Product is {{product.status}}
       </button>
-      
   </mat-card-actions>
 
 </mat-card>
