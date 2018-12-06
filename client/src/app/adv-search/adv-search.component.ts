@@ -1,27 +1,51 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ProductService } from '../_services/product.service';
 
 @Component({
   selector: 'app-adv-search',
   templateUrl: './adv-search.component.html',
-  styleUrls: ['./adv-search.component.css','../app.component.css']
+  styleUrls: ['./adv-search.component.css', '../app.component.css']
 })
 export class AdvSearchComponent implements OnInit {
-  
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  locations: Array<String>;
+  advSearch: FormGroup;
+
+  constructor(
+    private productService: ProductService,
+    private formBuilder: FormBuilder,
+    private router: Router) {}
 
   ngOnInit() {
-    let u = this.route.snapshot.params.d
+    this.locations = this.productService.locations;
+    this.advSearch = this.formBuilder.group({
+      'description': [''],
+      'minPrice': [''],
+      'maxPrice': [''],
+      'location': [''],
+      'minDate': [''],
+      'maxDate': [''],
+    });
   }
 
-  advSearch(form: NgForm){
-    //alert(this.postedDate+this.location+this.minPrice+this.maxPrice);
-    //console.log(form.value);
-    let d = JSON.stringify(form.value);
-    //console.log(d);
-    this.router.navigate(['list',{d:d}]);
-    //console.log(location);
+  search() {
+    const formValue = this.advSearch.value;
+    const queryParams = {};
+    for (const key in formValue) {
+      if (formValue.hasOwnProperty(key)) {
+        let param = formValue[key];
+        if (param === '' || param === undefined || param === null) {
+          queryParams[key] = null;
+        } else {
+          if (key === 'minDate' || key === 'maxDate') {
+            param = param.toISOString();
+          }
+          queryParams[key] = param;
+        }
+      }
+    }
+    this.router.navigate([''], { queryParamsHandling: 'merge', queryParams });
   }
 
 }

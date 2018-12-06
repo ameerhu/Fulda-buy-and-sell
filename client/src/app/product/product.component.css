@@ -1,4 +1,3 @@
-
 .product-header-image {
   background-size: cover;
 }
@@ -15,6 +14,15 @@
 }
 img {
   width: 100%;
+}
+
+.btn-approve{
+  background-color:#32CD32;
+}
+
+.btn-detail {
+  background-color: rgb(243, 13, 13);
+  color: white;
 }
 .product-actions {
   display: flex;

@@ -1,38 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from '../_services/product.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../model';
-import { Observable } from 'rxjs';
-import { config } from '../config';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators/takeUntil';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnDestroy {
+  _destroy$ = new Subject();
   products: Product[];
+  advanceSearch: Boolean;
 
   searchTerm;
-  constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit() {
-    this.productService.getAll();
-    this.productService.products.subscribe(data => {
+    this.productService.products$.pipe(takeUntil(this._destroy$)).subscribe(data => {
       this.products = data;
     });
-
-    if (this.route.snapshot.params.d) {
-      const d = this.route.snapshot.params.d;
-      this.productService.getAllByCriteria(this.route.snapshot.params.d);
-      this.router.navigate(['advSearch', { d: d }]);
-    } else {
-      this.productService.getAll();
-    }
+    this.productService.advanceSearch$.pipe(takeUntil(this._destroy$)).subscribe(data => {
+      this.advanceSearch = data;
+    });
   }
 
-  search() {
-    this.productService.getAll(this.searchTerm);
+  ngOnDestroy() {
+    this._destroy$.next();
   }
 
 }

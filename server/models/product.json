@@ -5,6 +5,9 @@
   "options": {
     "validateUpsert": true
   },
+  "scope": {
+    "include": ["category", "owner"]
+  },
   "properties": {
     "name": {
       "type": "string",
@@ -22,7 +25,8 @@
       "type": "string"
     },
     "status": {
-      "type": "string"
+      "type": "string",
+      "default": "pending"
     },
     "sold": {
       "type": "boolean",

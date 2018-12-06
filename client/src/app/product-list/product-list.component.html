@@ -1,4 +1,5 @@
 <div class="main-container">
+  <app-adv-search [hidden]="!advanceSearch"></app-adv-search>
   <ng-template ngFor let-product [ngForOf]="products">
     <app-product [product]="product"></app-product>
   </ng-template>
