@@ -24,6 +24,7 @@ export class Product {
     public images?: Array<String>,
     public price?: Number,
     public owner?: Customer,
+    public customerToWish?: Array<Customer>,
   ) { }
 
   static approvedUnsoldProductFilters = [

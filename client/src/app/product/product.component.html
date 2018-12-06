@@ -21,8 +21,7 @@
 
   </mat-list>
   <mat-card-actions class="product-actions">
-    <!--matBadgePosition="after" matBadgeColor="accent" matBadge="{{product.wish.length}}"-->
-    <button class="button-wish" mat-raised-button color="accent"
+    <button class="button-wish" mat-raised-button color="primary" matBadgePosition="after" matBadgeColor="accent" matBadge="{{product.customerToWish.length}}"
       (click)="hasWished()? unwish() : wish()">
       Wish
     </button>
