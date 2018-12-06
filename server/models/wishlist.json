@@ -11,12 +11,12 @@
     "customer": {
       "type": "belongsTo",
       "model": "Customer",
-      "foreignKey": "customer_Id"
+      "foreignKey": "customerId"
     },
     "product": {
       "type": "belongsTo",
       "model": "Product",
-      "foreignKey": "product_Id"
+      "foreignKey": "productId"
     }
   },
   "acls": [],
