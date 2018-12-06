@@ -19,12 +19,12 @@ export class ProductComponent {
     private route: ActivatedRoute,
     private router: Router,
     private auth: AuthenticationService,
-    ) {
-      this.currentUser = this.auth.currentUser;
-    }
+  ) {
+    this.currentUser = this.auth.currentUser;
+  }
 
   detailProduct(product: Product) {
-    this.router.navigate(['product/' + product.id ], {relativeTo: this.route});
+    this.router.navigate(['product/' + product.id], { relativeTo: this.route });
   }
 
   buy() {
@@ -34,14 +34,18 @@ export class ProductComponent {
   }
 
   hasWished() {
-    // return this.product.wish.filter(customer => customer.customername === this.currentUser.customername).length > 0;
+    return this.product.customerToWish.filter(customer => customer.username === this.currentUser.username).length > 0;
   }
 
   wish() {
-    // this.productService.wish(this.product, this.currentUser);
+    this.productService.wish(this.product, this.currentUser).subscribe(product => {
+      this.product.customerToWish.push(this.currentUser);
+    });
   }
 
   unwish() {
-    // this.productService.unwish(this.product, this.currentUser);
+    this.productService.unwish(this.product, this.currentUser).subscribe(data => {
+      this.product.customerToWish = data.product.customerToWish;
+    });
   }
 }

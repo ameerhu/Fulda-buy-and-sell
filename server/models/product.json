@@ -6,7 +6,11 @@
     "validateUpsert": true
   },
   "scope": {
-    "include": ["category", "owner", "customerToWish"]
+    "include": [
+      "category",
+      "owner",
+      "customerToWish"
+    ]
   },
   "properties": {
     "name": {
