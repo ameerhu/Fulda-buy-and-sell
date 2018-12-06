@@ -21,10 +21,10 @@
   },
   "validations": [],
   "relations": {
-    "productsInWish": {
+    "wishlist": {
       "type": "hasMany",
       "model": "Product",
-      "foreignKey": "customer_Id",
+      "foreignKey": "customerId",
       "through": "Wishlist"
     },
     "senderReceiverRelation": {

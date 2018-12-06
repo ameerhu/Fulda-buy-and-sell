@@ -6,7 +6,11 @@
     "validateUpsert": true
   },
   "scope": {
-    "include": ["category", "owner"]
+    "include": [
+      "category",
+      "owner",
+      "customerToWish"
+    ]
   },
   "properties": {
     "name": {
@@ -48,7 +52,7 @@
     "customerToWish": {
       "type": "hasMany",
       "model": "Customer",
-      "foreignKey": "product_Id",
+      "foreignKey": "productId",
       "through": "Wishlist"
     },
     "category": {

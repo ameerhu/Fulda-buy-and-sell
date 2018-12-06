@@ -11,14 +11,47 @@
     "customer": {
       "type": "belongsTo",
       "model": "Customer",
-      "foreignKey": "customer_Id"
+      "foreignKey": "customerId"
     },
     "product": {
       "type": "belongsTo",
       "model": "Product",
-      "foreignKey": "product_Id"
+      "foreignKey": "productId"
     }
   },
   "acls": [],
-  "methods": {}
+  "methods": {
+    "unwishproduct": {
+      "accepts": [
+        {
+          "arg": "reqBody",
+          "type": "object",
+          "required": true,
+          "description": "",
+          "http": {
+            "source": "body"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "product",
+          "type": "array",
+          "root": false,
+          "description": ""
+        },
+        {
+          "arg": "customer",
+          "type": "array",
+          "root": false,
+          "description": ""
+        }
+      ],
+      "description": "remove product from customers wishlist",
+      "http": {
+        "verb": "post",
+        "path": "/unwish"
+      }
+    }
+  }
 }
