@@ -8,6 +8,10 @@
   right: 0;
 }
 
+form {
+  display: flex;
+  justify-content: center;
+}
 .toolbar {
   /* Make sure the toolbar will stay on top of the content as it scrolls past. */
   z-index: 2;
