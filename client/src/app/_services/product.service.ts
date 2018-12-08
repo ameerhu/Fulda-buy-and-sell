@@ -108,16 +108,16 @@ export class ProductService {
   //   return this.http.put(config.apiUrl + '/products', Product);
   // }
 
-  // wish(product: Product, customer: Customer) {
-  //   product.wish.push(customer);
-  //   return this.http.put(config.apiUrl + '/products', Product);
-  // }
+  wish(product: Product, customer: Customer): Observable<Product> {
+    return this.http.post(config.apiUrl + '/wishlists',
+      { productId: product.id, customerId: customer.id }
+    );
+  }
 
-  // unwish(product: Product, customer: Customer) {
-  //   const index = product.wish.findIndex(u => u.customername === customer.customername);
-  //   if (index > -1) {
-  //     product.wish.splice(index, 1);
-  //   }
-  //   return this.http.put(config.apiUrl + '/products', Product);
-  // }
+  unwish(product: Product, customer: Customer): Observable<any> {
+    console.log({ productId: product.id, customerId: customer.id });
+    return this.http.post(config.apiUrl + '/wishlists/unwish',
+      { productId: product.id, customerId: customer.id }
+    );
+  }
 }

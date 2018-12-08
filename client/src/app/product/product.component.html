@@ -22,11 +22,11 @@
 
   </mat-list>
   <mat-card-actions class="product-actions" *ngIf="!(currentUser && currentUser.realm === 'admin')">
-    <!--matBadgePosition="after" matBadgeColor="accent" matBadge="{{product.wish.length}}"-->
     <button class="button-wish" mat-raised-button color="accent"
       *ngIf="!(currentUser && currentUser.id === product.owner.id)"
+      matBadgePosition="after" matBadgeColor="accent" matBadge="{{product.customerToWish.length}}"
       (click)="hasWished()? unwish() : wish()">
-      Wish
+      {{currentUser && hasWished()?'Unwish':'Wish'}}
     </button>
     <button mat-raised-button class="btn-approve"
       *ngIf="currentUser && currentUser.id === product.owner.id"

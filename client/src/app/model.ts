@@ -33,6 +33,7 @@ export class Product {
     public price?: Number,
     public owner?: Customer,
     public category?: Category,
+    public customerToWish?: Array<Customer>,
   ) { }
 
   static approvedUnsoldProductFilters = [

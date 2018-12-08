@@ -4,3 +4,8 @@ app-product {
   min-height: 250px;
   margin: 1rem 0.5rem 0;
 }
+
+
+.no-product {
+  margin: 10%;
+}
