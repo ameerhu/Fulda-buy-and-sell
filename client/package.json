@@ -1,7 +1,7 @@
 {
   "name": "you-buy",
   "version": "0.0.0",
-  "postinstall": "ng build --aot -prod",
+  "postinstall": "ng build --aot --prod",
   "engines": {
     "node": "9.11.1"
   },
