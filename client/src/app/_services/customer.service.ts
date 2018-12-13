@@ -27,4 +27,8 @@ export class CustomerService {
   delete(id: number) {
     return this.http.delete(`${config.apiUrl}/customers/` + id);
   }
+
+  getUserWishList(id: Number){
+    return this.http.get(`${config.apiUrl}/customers/${id}/wishlist`);
+  }
 }

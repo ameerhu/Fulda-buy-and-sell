@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Product } from '../model';
 import { ProductService } from '../_services/product.service';
 import { AdminService } from '../_services/admin.service';
@@ -16,6 +16,7 @@ import { AuthenticationService } from '../_services/authentication.service';
 export class ProductComponent {
   @Input() product: Product;
   @Input() isAdmin: Boolean;
+  @Output() unwishEmit = new EventEmitter();
   show: Boolean = true;
   currentUser;
 
@@ -86,6 +87,7 @@ export class ProductComponent {
   unwish() {
     this.productService.unwish(this.product, this.currentUser).subscribe(data => {
       this.product.customerToWish = data.product.customerToWish;
+      this.unwishEmit.emit(data);
     });
   }
 }

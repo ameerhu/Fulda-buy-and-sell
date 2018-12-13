@@ -29,6 +29,7 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { CustomerService } from './_services/customer.service';
 import { NavAdminComponent } from './nav-admin/nav-admin.component';
+import { UserProfileComponent } from './userprofile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { NavAdminComponent } from './nav-admin/nav-admin.component';
     AdvSearchComponent,
     LoginComponent,
     SignupComponent,
-    NavAdminComponent
+    NavAdminComponent,
+    UserProfileComponent
   ],
   imports: [
     ImageUploadModule.forRoot(),
