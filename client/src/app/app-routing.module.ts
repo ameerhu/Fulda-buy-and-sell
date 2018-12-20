@@ -4,6 +4,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { NewProductComponent } from './new-product/new-product.component';
 import { LoginComponent } from './login/login.component';
+import { CustomerMsgListComponent } from './customer-msg-list/customer-msg-list.component';
 import { SignupComponent } from './signup/signup.component';
 import { AuthGuard } from './_guard/auth.guard';
 import { NavComponent } from './nav/nav.component';
@@ -17,6 +18,8 @@ const routes: Route[] = [
       { path: '', component: ProductListComponent},
       { path: 'new', component: NewProductComponent, canActivate: [AuthGuard]},
       { path: 'product/:id', component: ProductDetailComponent, canActivate: [AuthGuard]},
+      { path: 'allMessages', component: CustomerMsgListComponent},
+      // { path: 'messages', component: MessageComponent},
       { path: '**', redirectTo: '', pathMatch: 'full' }
     ]
   },

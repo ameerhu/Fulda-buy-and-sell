@@ -1,0 +1,15 @@
+.side{
+    padding-bottom: 10%;
+}
+
+.clr{
+    color: #4285f4;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.list-container {
+    position: fixed;
+    width: 20%; 
+    height: 100%;  
+    border-right: lightgray 1px solid;
+}

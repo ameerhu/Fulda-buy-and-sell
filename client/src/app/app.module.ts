@@ -27,8 +27,11 @@ import { AuthenticationService } from './_services/authentication.service';
 import { AlertService } from './_services/alert.service';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
+import { MessagingService } from './_services/messaging.service';
 import { CustomerService } from './_services/customer.service';
 import { NavAdminComponent } from './nav-admin/nav-admin.component';
+import { MessageComponent } from './message/message.component';
+import { CustomerMsgListComponent } from './customer-msg-list/customer-msg-list.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,9 @@ import { NavAdminComponent } from './nav-admin/nav-admin.component';
     AdvSearchComponent,
     LoginComponent,
     SignupComponent,
-    NavAdminComponent
+    NavAdminComponent,
+    MessageComponent,
+    CustomerMsgListComponent
   ],
   imports: [
     ImageUploadModule.forRoot(),
@@ -77,6 +82,7 @@ import { NavAdminComponent } from './nav-admin/nav-admin.component';
     HttpClientModule,
     AuthenticationService,
     CustomerService,
+    MessagingService,
     // AuthGuard,
     AlertService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

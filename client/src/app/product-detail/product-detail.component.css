@@ -500,12 +500,24 @@
   margin: 1rem 0.5rem ;
 }
 
+ /* .display-pic{
+   padding-top: 10px;
+   height: auto;
+   width: 100%;
+ } */
+ 
  .display-pic{
-   width: 400px;
-   height: 400px;
-   /* border: 1px solid blue; */
- }
+  padding-top: 10px;
+  height: auto;
+  width: 100%;
+}
 
+/* 
+ .display-pic{
+  width: 400px;
+  height: 400px;
+} */
+ 
  .blockquote {
    margin-bottom: 1rem;
    font-size: 1.171875rem;

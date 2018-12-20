@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="list-container">
+      <p align="center"><b>Message List</b></p>{{messages.name}}
+      <mat-list>
+        <ng-template ngFor let-senders [ngForOf]="senderNames">
+            <mat-list-item mat-icon-button (click)="msgDetails(senders)">
+            <img ngxGravatar class="product-header-image" size="40">
+            <!-- <div class="col-sm-9"><b class="clr">Name here</b><br>Message body here</div> -->
+            <div class="col-sm-9"><b class="clr">{{senders}}</b><br>{{senders.body}}</div>
+            <!-- <div class="col-sm-9"><b class="clr">{{senders}}</b><br></div> -->
+          </mat-list-item>
+          <p></p>
+          <mat-divider class="side"></mat-divider>
+        </ng-template>
+      </mat-list>
+    </div>
+  </div>
+  <div class="col-sm-9">
+      <!-- {{sender.name}} -->
+      <p align="center"><b>Customer Messages</b></p>
+      <!-- {{sender.get(senders)}} -->
+      <app-message></app-message>
+    </div>
+  </div>
+</div>
