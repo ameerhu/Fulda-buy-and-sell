@@ -28,7 +28,7 @@ export class AdminService {
         this.products.next(data);
       });
   }
-  
+
   getDisapproved() {
     let queryString = '';
       queryString = '?filter[where][status]=disapproved';
@@ -38,10 +38,9 @@ export class AdminService {
       });
   }
 
-  approved(product){
-    console.log("in approve service");
+  approved(product) {
     console.log(product);
     return this.http.put(config.apiUrl + '/products' , product );
   }
-  
+
 }

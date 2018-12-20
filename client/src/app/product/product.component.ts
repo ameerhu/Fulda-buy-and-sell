@@ -22,10 +22,10 @@ export class ProductComponent {
 
   constructor(
     private productService: ProductService,
-    private adminService: AdminService, 
+    private adminService: AdminService,
     private route: ActivatedRoute,
     public snackBar: MatSnackBar,
-    private nAdmin : NavAdminComponent, 
+    private nAdmin: NavAdminComponent,
     private router: Router,
     private auth: AuthenticationService,
   ) {
@@ -39,33 +39,32 @@ export class ProductComponent {
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 3000,
-    }); 
+    });
   }
 
-  approved(product){      
-    product.status='approved';
-    this.adminService.approved(product).subscribe(result => this.show=false, error=> this.show=true);
-    this.openSnackBar("Notify","Product Approved");
-    this.nAdmin.searchByStatus('pending');
-    //location.reload();
-  }
-
-  disapproved(product){
-    product.status='disapproved';
-    this.adminService.approved(product).subscribe(result => this.show=false, error=> this.show=true);
-    this.openSnackBar("Notify","Product Dispproved");
+  approved(product) {
+    product.status = 'approved';
+    this.adminService.approved(product).subscribe(result => this.show = false, error => this.show = true);
+    this.openSnackBar('Notify', 'Product Approved');
     this.nAdmin.searchByStatus('pending');
   }
 
-  editProduct(product: Product){
-    this.router.navigate(['home/new',{product:JSON.stringify(product)}]);
+  disapproved(product) {
+    product.status = 'disapproved';
+    this.adminService.approved(product).subscribe(result => this.show = false, error => this.show = true);
+    this.openSnackBar('Notify', 'Product Dispproved');
+    this.nAdmin.searchByStatus('pending');
   }
 
-  deleteProduct(product){
-     this.productService.delete(product.id).subscribe(data => {
-         this.openSnackBar("Notify","Product has been deleted");
-         this.productService.getByCustomerId(this.currentUser.id);
-     });
+  editProduct(product: Product) {
+    this.router.navigate(['home/new', { product: JSON.stringify(product) }]);
+  }
+
+  deleteProduct(product) {
+    this.productService.delete(product.id).subscribe(data => {
+      this.openSnackBar('Notify', 'Product has been deleted');
+      this.productService.getByCustomerId(this.currentUser.id);
+    });
   }
 
   buy() {

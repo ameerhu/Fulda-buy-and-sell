@@ -10,7 +10,7 @@ import { ProductService } from '../_services/product.service';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-  currentUser
+  currentUser;
   customer: Object;
   show_profile = true;
   show_message = false;
@@ -29,7 +29,7 @@ export class UserProfileComponent implements OnInit {
         this.customer = data;
         console.log(this.customer);
       }
-    )
+    );
     this.getWishList();
   }
 

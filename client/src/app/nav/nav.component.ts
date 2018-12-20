@@ -41,7 +41,7 @@ export class NavComponent {
     this.auth.logout();
   }
 
-  dashboard(customerId){
+  dashboard() {
     this.productService.getByCustomerId(this.currentUser.id);
   }
 
