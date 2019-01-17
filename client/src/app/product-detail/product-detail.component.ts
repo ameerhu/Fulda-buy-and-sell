@@ -28,24 +28,24 @@ export class ProductDetailComponent implements OnInit {
     this.currentUser = this.auth.currentUser;
     this.route.params.subscribe(params => {
       this.productService.getById(params['id']).subscribe(product => {
-          this.product = product;
+        this.product = product;
       });
     });
   }
 
-  openSnackBar(message: string, action: string) {
+  openSnackBar(message, action) {
     this.snackBar.open(message, action, {
       duration: 3000,
-    }); 
+    });
   }
 
-  msgSend(senderId: string, receiverId: string, msg: string){
+  msgSend(senderId: String, receiverId: String, msg: String) {
     this.messages.customer_Sender_Id = senderId;
     this.messages.customer_Receiver_Id = receiverId;
     this.messages.body = msg;
     this.messages.msgDate = new Date();
-    this.messagingService.send(this.messages).subscribe(data=>{
-      this.openSnackBar("Notify","You Message has been send");
+    this.messagingService.send(this.messages).subscribe(data => {
+      this.openSnackBar('Notify', 'You Message has been send');
       this.msg = null;
     });
   }

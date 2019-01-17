@@ -20,12 +20,12 @@ export class Category {
   }
 }
 
-export class MessageList{
+export class MessageList {
   constructor(
     public senderId?: String,
     public senderName?: String,
     public text?: String,
-  ){}
+  ) { }
 }
 
 export class Messages {
