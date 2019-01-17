@@ -38,6 +38,10 @@ export class UserProfileComponent implements OnInit {
     this.show_wishlist = true;
   }
 
+  showMessages() {
+    console.log('Show messages');
+  }
+
   showProfile() {
     this.show_profile = true;
     this.show_wishlist = false;
