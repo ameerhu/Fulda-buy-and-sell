@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Product } from '../model';
 import { ProductService } from '../_services/product.service';
 import { AdminService } from '../_services/admin.service';
@@ -16,15 +16,16 @@ import { AuthenticationService } from '../_services/authentication.service';
 export class ProductComponent {
   @Input() product: Product;
   @Input() isAdmin: Boolean;
+  @Output() unwishEmit = new EventEmitter();
   show: Boolean = true;
   currentUser;
 
   constructor(
     private productService: ProductService,
-    private adminService: AdminService, 
+    private adminService: AdminService,
     private route: ActivatedRoute,
     public snackBar: MatSnackBar,
-    private nAdmin : NavAdminComponent, 
+    private nAdmin: NavAdminComponent,
     private router: Router,
     private auth: AuthenticationService,
   ) {
@@ -38,33 +39,32 @@ export class ProductComponent {
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 3000,
-    }); 
+    });
   }
 
-  approved(product){      
-    product.status='approved';
-    this.adminService.approved(product).subscribe(result => this.show=false, error=> this.show=true);
-    this.openSnackBar("Notify","Product Approved");
-    this.nAdmin.searchByStatus('pending');
-    //location.reload();
-  }
-
-  disapproved(product){
-    product.status='disapproved';
-    this.adminService.approved(product).subscribe(result => this.show=false, error=> this.show=true);
-    this.openSnackBar("Notify","Product Dispproved");
+  approved(product) {
+    product.status = 'approved';
+    this.adminService.approved(product).subscribe(result => this.show = false, error => this.show = true);
+    this.openSnackBar('Notify', 'Product Approved');
     this.nAdmin.searchByStatus('pending');
   }
 
-  editProduct(product: Product){
-    this.router.navigate(['home/new',{product:JSON.stringify(product)}]);
+  disapproved(product) {
+    product.status = 'disapproved';
+    this.adminService.approved(product).subscribe(result => this.show = false, error => this.show = true);
+    this.openSnackBar('Notify', 'Product Dispproved');
+    this.nAdmin.searchByStatus('pending');
   }
 
-  deleteProduct(product){
-     this.productService.delete(product.id).subscribe(data => {
-         this.openSnackBar("Notify","Product has been deleted");
-         this.productService.getByCustomerId(this.currentUser.id);
-     });
+  editProduct(product: Product) {
+    this.router.navigate(['home/new', { product: JSON.stringify(product) }]);
+  }
+
+  deleteProduct(product) {
+    this.productService.delete(product.id).subscribe(data => {
+      this.openSnackBar('Notify', 'Product has been deleted');
+      this.productService.getByCustomerId(this.currentUser.id);
+    });
   }
 
   buy() {
@@ -86,6 +86,7 @@ export class ProductComponent {
   unwish() {
     this.productService.unwish(this.product, this.currentUser).subscribe(data => {
       this.product.customerToWish = data.product.customerToWish;
+      this.unwishEmit.emit(data);
     });
   }
 }

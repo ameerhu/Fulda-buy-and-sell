@@ -20,7 +20,7 @@ export class NewProductComponent implements OnInit {
   uploadedImages = [];
   config = config;
   product: Product;
-  update: boolean = false;
+  update = false;
 
   constructor(
     private productService: ProductService,
@@ -28,13 +28,13 @@ export class NewProductComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private auth: AuthenticationService,
-  ) {}
+  ) { }
 
   ngOnInit() {
-    if(this.route.snapshot.params.product){
+    if (this.route.snapshot.params.product) {
       this.product = JSON.parse(this.route.snapshot.params.product);
       this.locations = this.productService.locations;
-    this.$categories = this.categoryService.get();
+      this.$categories = this.categoryService.get();
       this.newProduct = this.formBuilder.group({
         'description': [this.product.description, Validators.required],
         'name': [this.product.name, Validators.required],
@@ -47,25 +47,24 @@ export class NewProductComponent implements OnInit {
         'status': ['pending'],
         'images': [''],
       });
-      this.update=true;
-      }
-else{
-    this.locations = this.productService.locations;
-    this.$categories = this.categoryService.get();
-    this.newProduct = this.formBuilder.group({
-      'description': ['', Validators.required],
-      'name': ['', Validators.required],
-      'price': ['', Validators.required],
-      'location': ['', Validators.required],
-      'categoryId': ['', Validators.required],
-      'customerId': [this.auth.currentUser.id],
-      'postedDate': new Date(),
-      'sold': [false],
-      'status': ['pending'],
-      'images': [''],
-    });
-    this.update=false;
-  }
+      this.update = true;
+    } else {
+      this.locations = this.productService.locations;
+      this.$categories = this.categoryService.get();
+      this.newProduct = this.formBuilder.group({
+        'description': ['', Validators.required],
+        'name': ['', Validators.required],
+        'price': ['', Validators.required],
+        'location': ['', Validators.required],
+        'categoryId': ['', Validators.required],
+        'customerId': [this.auth.currentUser.id],
+        'postedDate': new Date(),
+        'sold': [false],
+        'status': ['pending'],
+        'images': [''],
+      });
+      this.update = false;
+    }
   }
 
   createNewProduct() {

@@ -1,0 +1,58 @@
+<div class="main">
+
+
+
+  <div class="central">
+      <table>
+          <tr>
+            <th id="feed-profile" (click)='showProfile()' >
+              Profile
+              <i class="material-icons">
+                  face
+                  </i>
+            </th>
+            <th id="feed-message" (click)="hide()" >
+              Messages
+              <i class="material-icons">
+                notification_important
+                </i>
+            </th>
+            <th id="feed-wishlist" (click)='showWishlist()'>
+                Wishlist
+                <i class="material-icons">
+                    shopping_basket
+                    </i>
+              </th>
+          </tr>
+        </table>
+       <div class="user-profile" *ngIf='show_profile'>
+         <div class="user-image">
+          <img ngxGravatar [email]="this.currentUser.email" size="80">
+         </div>
+         <div class="user-details">
+          <p>Username: {{currentUser.username}}</p>
+          <p>Email:  {{currentUser.address}}</p>
+          <p>Contact: {{currentUser.phone}}</p>
+          <p>Location: {{currentUser.address}} </p>
+         </div>
+        </div>
+
+        <div class="user-message"></div>
+
+
+        <div class="wishlist" *ngIf="show_wishlist">
+            <ng-template ngFor let-product [ngForOf]="user_wish_list">
+                <app-product [product]="product" (unwishEmit)="getWishList()"></app-product>
+              </ng-template>
+
+        </div>
+  </div>
+
+
+
+
+</div>
+
+
+
+
