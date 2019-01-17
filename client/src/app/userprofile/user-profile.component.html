@@ -1,6 +1,6 @@
 <div class="main">
-  
-  
+
+
 
   <div class="central">
       <table>
@@ -26,33 +26,33 @@
           </tr>
         </table>
        <div class="user-profile" *ngIf='show_profile'>
+         <div class="user-image">
+          <img ngxGravatar [email]="this.currentUser.email" size="80">
+         </div>
          <div class="user-details">
-          <p>Username: {{currentUser.name}}</p>
+          <p>Username: {{currentUser.username}}</p>
           <p>Email:  {{currentUser.address}}</p>
           <p>Contact: {{currentUser.phone}}</p>
           <p>Location: {{currentUser.address}} </p>
          </div>
-          <div class="user-image">
-           <img ngxGravatar [email]="this.currentUser.email" size="40">
-          </div>
         </div>
-       
+
         <div class="user-message"></div>
-          
+
 
         <div class="wishlist" *ngIf="show_wishlist">
             <ng-template ngFor let-product [ngForOf]="user_wish_list">
                 <app-product [product]="product" (unwishEmit)="getWishList()"></app-product>
               </ng-template>
-              
+
         </div>
   </div>
-  
-  
+
+
 
 
 </div>
-  
+
 
 
 

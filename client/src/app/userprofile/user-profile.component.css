@@ -11,12 +11,17 @@
     border: 1px solid black;
     padding:20px;
 }
+tr{
+  display: flex;
+}
+th {
+  width: 100%;
+}
 .central{
     padding: 20px;
     border:1px solid black;
     display: grid;
     text-align: center
-    
 }
 .table{
     margin: auto;
@@ -24,7 +29,8 @@
     display: inline-block
 }
 .user-profile{
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
 }
 .user-details{
     float:left;
@@ -49,9 +55,9 @@
 .example-card {
     max-width: 600px;
   }
-  
+
   .example-header-image {
-    
+
     background-size: cover;
   }
 
@@ -65,7 +71,7 @@
   }
 
   @media only screen and (max-width: 600px) {
-    th, td {
-        border:0px solid !important
+    tr {
+        flex-direction: column;
     }
   }

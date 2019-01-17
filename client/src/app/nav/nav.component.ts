@@ -42,6 +42,7 @@ export class NavComponent {
   }
 
   dashboard() {
+    this.router.navigate(['home/userprofile']);
     this.productService.getByCustomerId(this.currentUser.id);
   }
 
