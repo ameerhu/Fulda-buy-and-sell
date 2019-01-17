@@ -5,9 +5,16 @@
   "options": {
     "validateUpsert": true
   },
+  "scope": {
+    "include": ["senderU","receiverU"]
+  },
   "properties": {
     "body": {
       "type": "string",
+      "required": true
+    },
+    "msgDate":{
+      "type": "date",
       "required": true
     }
   },

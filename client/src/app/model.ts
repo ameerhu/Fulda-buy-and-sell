@@ -20,6 +20,27 @@ export class Category {
   }
 }
 
+export class MessageList{
+  constructor(
+    public senderId?: String,
+    public senderName?: String,
+    public text?: String,
+  ){}
+}
+
+export class Messages {
+  constructor(
+    public customer_Sender_Id?: String,
+    public customer_Receiver_Id?: String,
+    public body?: String,
+    public id?: String,
+    public msgDate?: Date,
+    public senderU?: Customer,
+    public receiverU?: Customer,
+  ) {
+  }
+}
+
 export class Product {
   constructor(
     public name?: String,

@@ -25,10 +25,10 @@
       </div>
 
       <mat-form-field class="example-full-width">
-        <textarea matInput placeholder="Enter your message" rows="5" cols="60"></textarea>
+        <textarea matInput placeholder="Enter your message" [(ngModel)]="msg" rows="5" cols="60"></textarea>
       </mat-form-field>
 
-      <button mat-raised-button color="primary">Send Message</button>
+      <button mat-raised-button color="primary" (click)="msgSend(currentUser.id,product.owner.id,msg)">Send Message</button>
     </div>
 <!-- 
     <div class="col-sm-3">
@@ -44,7 +44,7 @@
 
     <div class="col-sm-1"></div>
 
-    <div class="col-sm-3">
+    <div class="col-sm-5">
       <img [src]="product.images && product.images.length ? product.images[0] : '../assets/img/img-src.png'" class="display-pic"><br>
     </div>
   </div>
