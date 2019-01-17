@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ProductService } from '../_services/product.service';
+import { MessagingService } from '../_services/messaging.service';
 import { AuthenticationService } from '../_services/authentication.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class NavComponent {
     private breakpointObserver: BreakpointObserver,
     private router: Router,
     private productService: ProductService,
+    private messagingService: MessagingService,
     private auth: AuthenticationService
     ) {
       this.currentUser = this.auth.currentUser;
@@ -41,8 +43,16 @@ export class NavComponent {
     this.auth.logout();
   }
 
-  dashboard(customerId){
+  dashboard() {
+    this.router.navigate(['home/userprofile']);
     this.productService.getByCustomerId(this.currentUser.id);
+  }
+
+  messagesList(customerId){
+    this.router.navigate(['/home/allMessages']);
+    // this.router.navigate(['/home/messages'], { queryParamsHandling: 'merge', queryParams: { customerId: customerId }});
+    this.messagingService.getMsgCustomer(customerId);
+    console.log("customer id : "+customerId);
   }
 
 }

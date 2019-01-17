@@ -20,5 +20,5 @@
     "cors": false
   },
   "REGION": "us-east-2",
-  "Bucket": "fd04image"
+  "Bucket": "fd04pics"
 }
